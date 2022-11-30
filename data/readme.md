@@ -1,4 +1,4 @@
-## File description
+## Data description
 * cn_recipes_only_titles.json (all chinese recipes with only id and tile field)
 * en_recipes_only_titles.json (all english recipes with only id and tile field)
 * matched_recipes.json (matched results of Chinese and English dataset)

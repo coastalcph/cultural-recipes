@@ -23,7 +23,7 @@ python3 map_embeddings.py --unsupervised SRC.EMB TRG.EMB SRC_MAPPED.EMB TRG_MAPP
 If you have a NVIDIA GPU, append the --cuda flag to the above commands to make things faster.
 
 # Evaluation
-You can evaluate the mapped embeddings in bilingual lexicon extraction (aka dictionary induction or word translation) as follows:
+Provided you have cloned the [VecMap repository](https://github.com/artetxem/vecmap#readme) you can evaluate the mapped embeddings in bilingual lexicon extraction (aka dictionary induction or word translation) as follows:
 
 ```
 python3 eval_translation.py SRC_MAPPED.EMB TRG_MAPPED.EMB -d TEST.DICT

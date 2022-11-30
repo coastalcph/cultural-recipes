@@ -7,7 +7,7 @@ This folder will store information about token-level translation / dictionary in
 
 # Fasttext Embeddings
 
-To produce the fasttext embeddings you simply need to upoload your data in google drive, load the .ipynb file in Jupyter Notebook/Google Colab and mount your google drive to the notebook. Run all the cells and at the end the output will be two .txt files with the fasttext embeddings. (Comment: now that I have access to the cluster, I will probably adapt this code to a command-line interface.
+To produce the fasttext embeddings you simply need to upoload your data in google drive, load the fasttext_embeddings.ipynb file in Jupyter Notebook/Google Colab and mount your google drive to the notebook. Run all the cells and at the end the output will be two .txt files with the fasttext embeddings. (Comment: now that I have access to the cluster, I will probably adapt this code to a command-line interface.
 
 # Mapping between embeddings
 

@@ -34,16 +34,4 @@ python3 eval_translation.py SRC_MAPPED.EMB TRG_MAPPED.EMB -d TEST.DICT --retriev
 While better, CSLS is also significantly slower than nearest neighbor, so do not forget to append the --cuda flag to the above command if you have a NVIDIA GPU.
 ```
 
-In addition to bilingual lexicon extraction, you can also evaluate your mapped embeddings in cross-lingual word similarity as follows:
-
-```
-python3 eval_similarity.py -l --backoff 0 SRC_MAPPED.EMB TRG_MAPPED.EMB -i TEST_SIMILARITY.TXT
-```
-
-Finally, the [VecMap repository](https://github.com/artetxem/vecmap#readme) also offers an evaluation tool for monolingual word analogies, which mimics the one included with word2vec but should run significantly faster:
-
-```
-python3 eval_analogy.py -l SRC_MAPPED.EMB -i TEST_ANALOGIES.TXT -t 30000
-```
-
-The training dictionary `TRAIN.DICT`, if any, should be given as a text file with one entry per line (source word + whitespace + target word). I guess the same applies to the `TEST.DICT` ? 
+The training dictionary `TEST.DICT`, if any, should be given as a text file with one entry per line (source word + whitespace + target word). 

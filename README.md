@@ -17,8 +17,10 @@ Format of a recipe
 Format of a matched_recipe
 
 ```
+{
 'source': recipe,
 'targets': List[recipe]
+}
 ```
 
 

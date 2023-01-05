@@ -1,7 +1,7 @@
 # x-cultural-recipes
 Cross-cultural recipe adaptation
 
-Format of a recipe 
+Format of a `recipe` 
 
 ```
 {
@@ -14,7 +14,7 @@ Format of a recipe
 }
 ```
 
-Format of a matched_recipe
+Format of a `matched_recipe`
 
 ```
 {
@@ -26,7 +26,7 @@ Format of a matched_recipe
 
 | File  |  Format | Link  | Notes  | 
 |---|---|---|---|
-| Silver cn2en data  | {'train': List(matched_recipe), 'val': List(matched_recipe), 'test': List(matched_recipe)} |   |   |   
-| Gold cn2en data  |  List(matched_recipe) |   |   |   
-| Silver en2cn data  | {'train': List(matched_recipe), 'val': List(matched_recipe), 'test': List(matched_recipe)} |   |   |   
-| Gold en2cn data  |  List(matched_recipe)  |   |   |   
+| Silver cn2en data  | {'train': `List(matched_recipe)`, 'val': `List(matched_recipe)`, 'test': `List(matched_recipe)`} |   |   |   
+| Gold cn2en data  |  `List(matched_recipe)` |   |   |   
+| Silver en2cn data  | {'train': `List(matched_recipe)`, 'val': `List(matched_recipe)`, 'test': `List(matched_recipe)`} |   |   |   
+| Gold en2cn data  |  `List(matched_recipe)`  |   |   |   

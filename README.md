@@ -35,5 +35,4 @@ Format of a data file: `jsonl` with one `matched_recipe` per line
 | Silver en2cn data - val  | https://drive.google.com/file/d/1t6QJcU68IXTUTYtAJ1Ee5gSJw7Vjd1HY/view?usp=share_link  |   |    
 | Silver en2cn data - test  | https://drive.google.com/file/d/1ldenL_YaaK23ex-53ynwf-ufJEaR6zei/view?usp=share_link  |   |  
 | Gold en2cn data  |   |   |     
-| Gold en2cn data  |   |   |   
 

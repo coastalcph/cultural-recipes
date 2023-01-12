@@ -123,9 +123,9 @@ def main(args):
         store_results(None, None, metrics, output_dir, 'val_')
     elif args.do_predict:
         predictions, _, _  = trainer.predict(test_dataset)
-        predictions, labels = postprocess_test_data(predictions, test_dataset.targets, tokenizer)
+        inputs, predictions, labels = postprocess_test_data(test_dataset.inputs, predictions, test_dataset.targets, tokenizer)
         metrics = compute_test_metrics(predictions, labels)
-        store_results(predictions, labels, metrics, output_dir, 'test_')
+        store_results(inputs, predictions, labels, metrics, output_dir, 'test_')
     elif args.do_predict_zero_shot:
         predictions, _, _  = trainer.predict(test_dataset)
         inputs, predictions, labels = postprocess_test_data(test_dataset.inputs, predictions, test_dataset.targets, tokenizer)

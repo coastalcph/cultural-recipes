@@ -25,14 +25,21 @@ Format of a `matched_recipe`
 
 Format of a data file: `jsonl` with one `matched_recipe` per line
 
-| File  |  Link  | Notes  | 
-|---|---|---|
-| Silver cn2en data - train  | https://drive.google.com/file/d/15eVi_MsW4DGnP2v000EOWIN935q94NAA/view?usp=share_link  |   |    
-| Silver cn2en data - val  |  https://drive.google.com/file/d/1Xm5w-ATg1HtJYTKu-ui1UhAtZ5naZqNE/view?usp=share_link |   |    
-| Silver cn2en data - test  | https://drive.google.com/file/d/1hiV-XcoknjtHvWXpg3QUzNkD3-XXYqDP/view?usp=share_link  |   |   
-| Gold cn2en data  |   |   |   
-| Silver en2cn data - train  |  https://drive.google.com/file/d/1cJpNZs_E0O-ur6Yo8sDJrYycBrdXISot/view?usp=share_link |   |    
-| Silver en2cn data - val  | https://drive.google.com/file/d/1t6QJcU68IXTUTYtAJ1Ee5gSJw7Vjd1HY/view?usp=share_link  |   |    
-| Silver en2cn data - test  | https://drive.google.com/file/d/1ldenL_YaaK23ex-53ynwf-ufJEaR6zei/view?usp=share_link  |   |  
-| Gold en2cn data  |   |   |     
+| File  |  Link  |cn:en | Notes  | 
+|---|---|---|---|
+| Silver cn2en data - train  | [Download Link](https://drive.google.com/file/d/15eVi_MsW4DGnP2v000EOWIN935q94NAA/view?usp=share_link)  | 1:n* |    
+| Silver cn2en data - val  |  [Download Link](https://drive.google.com/file/d/1Xm5w-ATg1HtJYTKu-ui1UhAtZ5naZqNE/view?usp=share_link) | 1:n  |    
+| Silver cn2en data - test  | [Download Link](https://drive.google.com/file/d/1hiV-XcoknjtHvWXpg3QUzNkD3-XXYqDP/view?usp=share_link)  | 1:n  |   
+| Gold cn2en data  | [Download Link](https://drive.google.com/file/d/1j3cOR4VGPb8hfGT5jLIZKKs3XuIAClus/view?usp=share_link)  | 1:1  |   
+| Silver en2cn data - train  |[Download Link](https://drive.google.com/file/d/1rlMeapVEjXI2ghqcZo9daZU_xK5gV742/view?usp=share_link) | n:1 |    
+| Silver en2cn data - val  | [Download Link](https://drive.google.com/file/d/1BLg8gVAMiXmA2hvwR95a9qYzERPZLvWS/view?usp=share_link) | n:1  |    
+| Silver en2cn data - test  | [Download Link](https://drive.google.com/file/d/1W2uKg3yQWyYrXKJHbzVFIeuzkDijqdW8/view?usp=share_link) | n:1 |  
+| Gold en2cn data  | [Download Link](https://drive.google.com/file/d/1tJjJbEHdILLr__NL4LX7S5ldJDKoueAH/view?usp=share_link)  | 1:1 |  
+* n ≤ 10   
 
+Statistics of CulturalDataset
+
+| Direction  |  Source  | Target | Train  | Valid | Test | Golden |
+|---|---|---|---|---|---|---|
+| cn2en | 44,473 | 144,645 | 35,578 | 4,447 | 4,448 | 189 |
+| en2cn | 43,767 | 120,674 | 35,013 | 4,377 | 4,377 | 79  | 

@@ -38,7 +38,7 @@ Format of a data file: `jsonl` with one `matched_recipe` per line
 
 n ≤ 10. 
 
-[Monolingual Chinese dataset](https://drive.google.com/file/d/1U9qpLk5VzQM4lY2NujGTsnz1TkIy-EO2/view?usp=share_link) (cleaned) and [English monolingual dataset](https://drive.google.com/file/d/1WhKebcqzBTC_8T679ROmuUPy0sHi_4OL/view?usp=share_link) (raw) 
+[Chinese monolingual dataset](https://drive.google.com/file/d/1U9qpLk5VzQM4lY2NujGTsnz1TkIy-EO2/view?usp=share_link) (cleaned) and [English monolingual dataset](https://drive.google.com/file/d/1WhKebcqzBTC_8T679ROmuUPy0sHi_4OL/view?usp=share_link) (raw) 
 
 Statistics of CulturalDataset
 

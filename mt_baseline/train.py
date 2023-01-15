@@ -59,7 +59,8 @@ def store_results(inputs, predictions, labels, metrics, output_dir, prefix):
     json.dump(metrics, open(os.path.join(output_dir, prefix + 'metrics.json'), 'w'))
     with open(os.path.join(output_dir, prefix + 'preds.jsonl'), 'w') as preds_out:
         for inp, pred, lab in zip(inputs, predictions, labels):
-            preds_out.write('{}\n'.format(json.dumps({'source': inp, 'references': lab, 'prediction': pred})))
+            preds_out.write('{}\n'.format(json.dumps({'source': inp, 'references': lab, 'prediction': pred}, 
+                                                                                       ensure_ascii=False)))
      
 def main(args):
 
@@ -123,7 +124,7 @@ def main(args):
         store_results(None, None, metrics, output_dir, 'val_')
     elif args.do_predict:
         predictions, _, _  = trainer.predict(test_dataset)
-        inputs, predictions, labels = postprocess_test_data(test_dataset.inputs, predictions, test_dataset.targets, tokenizer)
+        inputs, predictions, labels = postprocess_test_data(test_dataset.inputs,predictions, test_dataset.targets, tokenizer)
         metrics = compute_test_metrics(predictions, labels)
         store_results(inputs, predictions, labels, metrics, output_dir, 'test_')
     elif args.do_predict_zero_shot:

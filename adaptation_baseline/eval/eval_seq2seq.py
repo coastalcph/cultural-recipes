@@ -46,8 +46,6 @@ def evaluate_all(path, evaluator):
         for row in tqdm(f):
             reference = [item.strip() for item in json.loads(row)['references']]
             recover = json.loads(row)['prediction'].strip()
-            source = json.loads(row)['source'].strip()
-            source = source.replace(args.eos, '').replace(args.sos, '')
             recover = recover.replace(args.eos, '').replace(args.sos, '').replace(args.sep, '').replace(args.pad, '')
             avg_len.append(len(recover.split(' ')))
             bleu.append(evaluator.get_bleu(recover, reference, target_lan))
@@ -105,12 +103,8 @@ def evaluate_component(path, evaluator, fields):
     with open(path, 'r') as f:
         cnt = 0
         for row in tqdm(f):
-            # breakpoint()
             reference = [extract_componets(item.strip(), fields) for item in json.loads(row)['references']]
             recover = extract_componets(json.loads(row)['prediction'].strip(), fields)
-            source = extract_componets(json.loads(row)['source'].strip(), fields)
-            # print(source, reference, recover)
-            source = source.replace(args.eos, '').replace(args.sos, '')
             recover = recover.replace(args.eos, '').replace(args.sos, '').replace(args.sep, '').replace(args.pad, '')
             avg_len.append(len(recover.split(' ')))
             try:

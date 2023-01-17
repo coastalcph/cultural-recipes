@@ -16,11 +16,11 @@ class Evaluator:
         self.rougeScore = ROUGEScore()
         pass
 
-    def get_bleu(self, preds, labels, target_lan):
+    def get_corpus_bleu(self, preds, labels, target_lan):
         if target_lan == "en":
-            return self.bleu.compute(predictions=[preds], references=[labels], smooth=True)
+            return self.bleu.compute(predictions=preds, references=labels)
         elif target_lan == "cn":
-            return self.bleu.compute(predictions=[' '.join(list(preds))], references=[[' '.join(list(item)) for item in labels]], smooth=True)
+            return self.bleu.compute(predictions=preds, references=labels)
 
     def get_roughl(self, preds, labels):
         if self.language == "en":
@@ -38,7 +38,6 @@ class Evaluator:
 def evaluate_all(path, evaluator):
     references = []
     recovers = []
-    bleu = []
     rougel = []
     avg_len = []
     with open(path, 'r') as f:
@@ -48,11 +47,11 @@ def evaluate_all(path, evaluator):
             recover = json.loads(row)['prediction'].strip()
             recover = recover.replace(args.eos, '').replace(args.sos, '').replace(args.sep, '').replace(args.pad, '')
             avg_len.append(len(recover.split(' ')))
-            bleu.append(evaluator.get_bleu(recover, reference, target_lan))
             rougel.append(evaluator.get_roughl(recover, reference))
             recovers.append(recover)
             references.append(reference)
             cnt += 1
+    bleu = evaluator.get_corpus_bleu(recovers, references, target_lan)
     P, R, F1 = evaluator.get_bert_score(recovers, references)
     return bleu, rougel, F1, avg_len
 
@@ -144,7 +143,7 @@ if __name__ == '__main__':
         bleu, rougel, F1, avg_len = evaluate_component(path, evaluator, component)
 
     print('*'*30)
-    print('avg BLEU score', np.mean([item['bleu'] for item in bleu]))
+    print('BLEU score', bleu['bleu'])
     print('avg ROUGE-L score', np.mean(rougel))
     print('avg berscore', torch.mean(F1))
     print('avg len', np.mean(avg_len))

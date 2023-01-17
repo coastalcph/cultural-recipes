@@ -20,7 +20,8 @@ class Evaluator:
         if target_lan == "en":
             return self.bleu.compute(predictions=preds, references=labels)
         elif target_lan == "cn":
-            return self.bleu.compute(predictions=preds, references=labels)
+            return self.bleu.compute(predictions=[' '.join(list(p)) for p in preds], 
+                                     references=[[' '.join(list(l)) for l in label] for label in labels])
 
     def get_roughl(self, preds, labels):
         if self.language == "en":

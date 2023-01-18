@@ -23,10 +23,10 @@ class Evaluator:
 
     def get_roughl(self, preds, labels):
         if self.language == "en":
-            return self.rougeScore.compute(predictions=[preds], references=labels)['rougeLsum']
+            return self.rougeScore.compute(predictions=[preds], references=[labels])['rougeLsum']
         elif self.language == "cn":
             return self.rougeScore.compute(predictions=' '.join(list(preds)),
-                                           references=[' '.join(list(item)) for item in labels])['rougeLsum']
+                                           references=[[' '.join(list(item)) for item in labels]])['rougeLsum']
 
     def get_bert_score(self, preds, labels):
         if self.language == "en":

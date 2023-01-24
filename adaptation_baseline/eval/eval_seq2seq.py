@@ -5,7 +5,6 @@ from tqdm import tqdm
 import evaluate
 import re
 
-
 class Evaluator:
     def __init__(self, lan):
         self.language = lan
@@ -136,6 +135,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
     path = args.file
     print("we are evaluating ", path)
+
+    if '2cn' in args.file and args.tgt_lan != 'cn':
+        print('!'*100)
+        print('You seem to be evaluating a file with Chinese targets but tgt_lan is not set to cn - please fix')
+        
     evaluator = Evaluator(args.tgt_lan)
     target_lan = args.tgt_lan
     component = args.component

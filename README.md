@@ -34,7 +34,7 @@ Format of a data file: `jsonl` with one `matched_recipe` per line
 | Silver en2cn data - train  |[Download Link](https://drive.google.com/file/d/1rlMeapVEjXI2ghqcZo9daZU_xK5gV742/view?usp=share_link) | n:1 |    
 | Silver en2cn data - val  | [Download Link](https://drive.google.com/file/d/1BLg8gVAMiXmA2hvwR95a9qYzERPZLvWS/view?usp=share_link) | n:1  |    
 | Silver en2cn data - test  | [Download Link](https://drive.google.com/file/d/1W2uKg3yQWyYrXKJHbzVFIeuzkDijqdW8/view?usp=share_link) | n:1 |  
-| Gold en2cn data  | [Download Link]()  | n:n |  
+| Gold en2cn data  | [Download Link](https://drive.google.com/file/d/1mVk9Elz9WPGZDt45g6rQOPHtf9CaK1Xo/view?usp=share_link)  | n:n |  
 
 n ≤ 10. 
 

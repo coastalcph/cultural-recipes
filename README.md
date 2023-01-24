@@ -1,4 +1,4 @@
-# x-cultural-recipes
+# CulturalRecipes
 Cross-cultural recipe adaptation
 
 Format of a `recipe` 

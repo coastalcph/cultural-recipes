@@ -4,6 +4,7 @@ import argparse
 from tqdm import tqdm
 import evaluate
 import re
+import jieba 
 
 class Evaluator:
     def __init__(self, lan):
@@ -35,26 +36,50 @@ class Evaluator:
             return self.bertScore.compute(predictions=preds, references=labels,
                                           model_type='bert-base-chinese', lang='cn', verbose=True)['f1']
 
+def stripping_headings(r):
+    r = r.replace('Title:', '').replace('Ingredients:', '').replace('Steps:', '')
+    r = r.replace('title:', '').replace('ingredients:', '').replace('steps:', '')
+    r = r.replace('標題:', '').replace('原料:', '').replace('腳步:', '')
+    return r
 
-def evaluate_all(path, evaluator):
+def tokenize(r, tgt_lan):
+    if tgt_lan == 'cn':
+        r = list(jieba.cut(r, cut_all=False))
+    else:
+        r = r.split()
+    return ' '.join(r)
+
+def evaluate_all(path, evaluator, strip_headings):
     references = []
+    references_tok = []
     recovers = []
+    recovers_tok = []
     rougel = []
-    avg_len = []
+    avg_len_recover = []
+    avg_len_reference = []
     with open(path, 'r') as f:
         cnt = 0
         for row in tqdm(f):
-            reference = [item.strip() for item in json.loads(row)['references']]
-            recover = json.loads(row)['prediction'].strip()
+            row = json.loads(row)
+            reference = [item.strip() for item in row['references']]
+            recover = row['prediction'].strip()
+            if strip_headings:
+                reference = [stripping_headings(r) for r in reference]
+                recover = stripping_headings(recover)
             recover = recover.replace(args.eos, '').replace(args.sos, '').replace(args.sep, '').replace(args.pad, '')
-            avg_len.append(len(recover.split(' ')))
-            rougel.append(evaluator.get_roughl(recover, reference))
+            recover_tok = tokenize(recover, target_lan)
+            reference_tok = [tokenize(r, target_lan) for r in reference]
+            avg_len_recover.append(len(recover_tok.split()))
+            avg_len_reference+=[len(r.split()) for r in reference_tok]
+            rougel.append(evaluator.get_roughl(recover_tok, reference_tok))
             recovers.append(recover)
+            recovers_tok.append(recover)
             references.append(reference)
+            references_tok.append(reference_tok)
             cnt += 1
-    bleu = evaluator.get_corpus_bleu(recovers, references, target_lan)
+    bleu = evaluator.get_corpus_bleu(recovers_tok, references_tok, target_lan)
     bert_score = evaluator.get_bert_score(recovers, references)
-    return bleu, rougel, bert_score, avg_len
+    return bleu, rougel, bert_score, avg_len_recover, avg_len_reference
 
 
 def extract_componets(content, fields):
@@ -96,26 +121,32 @@ def extract_componets(content, fields):
 
 def evaluate_component(path, evaluator, fields):
     references = []
+    references_tok = []
     recovers = []
+    recovers_tok = []
     rougel = []
     avg_len = []
     with open(path, 'r') as f:
         cnt = 0
         for row in tqdm(f):
             reference = [extract_componets(item.strip(), fields) for item in json.loads(row)['references']]
+            reference_tok = [tokenize(r, target_lan) for r in reference]
             recover = extract_componets(json.loads(row)['prediction'].strip(), fields)
             recover = recover.replace(args.eos, '').replace(args.sos, '').replace(args.sep, '').replace(args.pad, '')
-            avg_len.append(len(recover.split(' ')))
+            recover_tok = tokenize(recover, target_lan)
+            avg_len.append(len(recover_tok.split(' ')))
             # breakpoint()
             try:
-                rougel.append(evaluator.get_roughl(recover, reference))
+                rougel.append(evaluator.get_roughl(recover_tok, reference_tok))
             except:
                 rougel.append(0.0)
             recovers.append(recover)
+            recovers_tok.append(recover_tok)
             references.append(reference)
+            references_tok.append(reference_tok)
             cnt += 1
     breakpoint()
-    bleu = evaluator.get_corpus_bleu(recovers, references, target_lan)
+    bleu = evaluator.get_corpus_bleu(recovers_tok, references_tok, target_lan)
     bert_score = evaluator.get_bert_score(recovers, references)
 
     return bleu, rougel, bert_score, avg_len
@@ -131,25 +162,29 @@ if __name__ == '__main__':
     parser.add_argument('--pad', type=str, default='[PAD]', help='pad token of the sentence')
     parser.add_argument('--tgt_lan', type=str, default='en', help='target adaptation language')
     parser.add_argument('--component', type=str, default=None, help='target adaptation language')
+    parser.add_argument('--strip_heading', type=bool, default=False, help='')
 
     args = parser.parse_args()
     path = args.file
     print("we are evaluating ", path)
+    if args.strip_heading: print('without headings')
 
     if '2cn' in args.file and args.tgt_lan != 'cn':
         print('!'*100)
         print('You seem to be evaluating a file with Chinese targets but tgt_lan is not set to cn - please fix')
-        
+        exit()
+
     evaluator = Evaluator(args.tgt_lan)
     target_lan = args.tgt_lan
     component = args.component
     if component == None:
-        bleu, rougel, F1, avg_len = evaluate_all(path, evaluator)
+        bleu, rougel, F1, avg_len_recover, avg_len_reference = evaluate_all(path, evaluator, args.strip_heading)
     else:
-        bleu, rougel, F1, avg_len = evaluate_component(path, evaluator, component)
+        bleu, rougel, F1, avg_len_recover, avg_len_reference = evaluate_component(path, evaluator, component)
 
     print('*' * 30)
     print('BLEU score', bleu)
     print('avg ROUGE-L score', np.mean(rougel))
     print('avg berscore', np.mean(F1))
-    print('avg len', np.mean(avg_len))
+    print('avg len references', np.mean(avg_len_reference))
+    print('avg len prediction', np.mean(avg_len_recover))

@@ -15,18 +15,15 @@ class Evaluator:
         pass
 
     def get_corpus_bleu(self, preds, labels, target_lan):
-        if target_lan == "en":
-            return self.bleu.compute(predictions=preds, references=labels)['bleu']
-        elif target_lan == "cn":
-            return self.bleu.compute(predictions=[' '.join(list(p)) for p in preds],
-                                     references=[[' '.join(list(l)) for l in label] for label in labels])['bleu']
+        return self.bleu.compute(predictions=preds, references=labels)['bleu']
 
     def get_roughl(self, preds, labels):
         if self.language == "en":
             return self.rougeScore.compute(predictions=[preds], references=[labels])['rougeLsum']
         elif self.language == "cn":
             return self.rougeScore.compute(predictions=[' '.join(list(preds))],
-                                           references=[[' '.join(list(item)) for item in labels]])['rougeLsum']
+                                           references=[[' '.join(list(item)) for item in labels]],
+                                           tokenizer=lambda x: x.split(" "))['rougeLsum']
 
     def get_bert_score(self, preds, labels):
         if self.language == "en":
@@ -73,7 +70,7 @@ def evaluate_all(path, evaluator, strip_headings):
             avg_len_reference+=[len(r.split()) for r in reference_tok]
             rougel.append(evaluator.get_roughl(recover_tok, reference_tok))
             recovers.append(recover)
-            recovers_tok.append(recover)
+            recovers_tok.append(recover_tok)
             references.append(reference)
             references_tok.append(reference_tok)
             cnt += 1

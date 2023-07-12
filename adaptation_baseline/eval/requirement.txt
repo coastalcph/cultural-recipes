@@ -1,5 +1,0 @@
-torchmetrics
-numpy
-torch
-bert_score
-nltk

@@ -11,6 +11,7 @@ echo $SLURMD_NODENAME $CUDA_VISIBLE_DEVICES
 . /etc/profile.d/modules.sh
 eval "$(conda shell.bash hook)"
 conda activate ~/anaconda3/envs/xamr
+pip3 install torch==1.10.2+cu113 torchvision torchaudio  -f https://download.pytorch.org/whl/torch_stable.html
 checkpoint=XAMR/ckpt/best.pt # this points to the pretrained model you have downloaded
 indir=/ceph/hpc/data/d2023d06-049-users/xamr/input
 outdir=/ceph/hpc/data/d2023d06-049-users/xamr/pred

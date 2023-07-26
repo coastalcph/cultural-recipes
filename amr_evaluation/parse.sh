@@ -15,6 +15,7 @@ pip3 install torch==1.10.2+cu113 torchvision torchaudio  -f https://download.pyt
 checkpoint=XAMR/ckpt/best.pt # this points to the pretrained model you have downloaded
 indir=/ceph/hpc/data/d2023d06-049-users/xamr/input
 outdir=/ceph/hpc/data/d2023d06-049-users/xamr/pred
+tmpdir=/ceph/hpc/data/d2023d06-049-users/xamr/tmp
 mkdir -p $outdir
 
 for dataset in $indir/*.txt; do
@@ -23,8 +24,8 @@ for dataset in $indir/*.txt; do
 	   --checkpoint ${checkpoint} \
 	   --dataset ${dataset} \
 	   --nproc-per-node 4 \
-	   --gold-path $outdir/$(basename $dataset txt)gold.txt \
-	   --pred-path $outdir/$(basename $dataset txt)pred.txt \
+	   --gold-path $tmpdir/$(basename $dataset) \
+	   --pred-path $outdir/$(basename $dataset) \
 	   --beam-size 4 \
 	   --batch-size 5000 \
 	   --penman-linearization \

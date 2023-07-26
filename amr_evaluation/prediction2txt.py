@@ -11,7 +11,7 @@ def main():
     with open(args.jsonl_file, 'r') as jsonl_file, open(args.output_file, 'w') as txt_file:
         for idx, line in enumerate(jsonl_file):
             data = json.loads(line)
-            prediction = data.get('prediction', '')
+            prediction = data.get('prediction', '').replace('\n', ' ')
             txt_file.write(f'# ::id {idx}\n')
             txt_file.write(f'# ::snt {prediction}\n')
             txt_file.write(f'# ::snt_lang {args.lang}\n')

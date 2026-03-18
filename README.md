@@ -55,11 +55,14 @@ Format of a data file: `jsonl` with one `matched_recipe` per line
 | Silver | en2cn     | 52    | [Download](https://drive.google.com/drive/folders/1s14s8bEFtuHsEu5VcCnoUYsxIR1k6jRj?usp=sharing) | 1:1 |
 | Human  | en2cn     | 41    | [Download](https://drive.google.com/drive/folders/1GWNdVwMtWTuTWiaoT3CXuYtxRlLhS1he?usp=sharing) | 1:1 |
 
-[Chinese monolingual dataset](https://drive.google.com/file/d/1U9qpLk5VzQM4lY2NujGTsnz1TkIy-EO2/view?usp=share_link) (cleaned) and [English monolingual dataset](https://drive.google.com/file/d/1WhKebcqzBTC_8T679ROmuUPy0sHi_4OL/view?usp=share_link) (raw) 
+
+Original Dataset Download:
+
+[Chinese monolingual dataset](https://drive.google.com/file/d/16_X3I3mt-eIaVx5g1ZxA0uks_fD_IBiy/view) and [English monolingual dataset](https://recipenlg.cs.put.poznan.pl/dataset) (Need to apply) 
 
 Statistics of CulturalDataset
 
-| Direction  |  Source  | Target | Train  | Valid | Test | Silver | Human |
-|---|---|---|---|---|---|--------|-------|
-| cn2en | 44,473 | 144,645 | 35,578 | 4,447 | 4,448 | 82     | 25 | 
-| en2cn | 43,767 | 120,674 | 35,013 | 4,377 | 4,377 | 52     | 41 | 
+| Direction  |  Source  | Target | Train  | Valid | Test | Silver | Human | Link |
+|---|---|---|---|---|---|--------|-------|--------|
+| cn2en | 44,473 | 144,645 | 35,578 | 4,447 | 4,448 | 82     | 25 | [Download](https://drive.google.com/drive/folders/1Fnpuki1EdtLd1R7Iqs4a5yXaLf3mindU?usp=sharing) |
+| en2cn | 43,767 | 120,674 | 35,013 | 4,377 | 4,377 | 52     | 41 | [Download](https://drive.google.com/drive/folders/10HJd3bBgBJcCcxeN417K8srseKOn4XuE?usp=sharing) |
